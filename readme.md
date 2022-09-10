@@ -8,3 +8,12 @@
 
     - Handler   <-- Handler data like http, api, cmd
 ```
+
+
+## Getting start
+
+Run via Docker
+```docker-compose up```
+
+Access app
+```http://localhost:8080```
