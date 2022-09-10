@@ -1,0 +1,11 @@
+FROM golang:1.18.0 as base
+FROM base as dev
+
+RUN apt-get install curl git -y
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN apt-get install nodejs -y
+RUN npm install -g nodemon
+
+WORKDIR /app
+RUN ls -lah
+CMD ["nodemon", "--legacy-watch", "/app", "-e", "go", "--exec", "go run main.go"]
