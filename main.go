@@ -1,5 +1,7 @@
 package main
 
+import "clydra.io/app/handler"
+
 func main() {
-	// TODO
+	handler.StartHttpHandler()
 }
