@@ -14,16 +14,16 @@ type DatabaseService interface {
 	Init(ctx context.Context)
 }
 
-type DatabaseServiceImpl struct {
+type databaseServiceImpl struct {
 	db         *gorm.DB
 	cfgService *config.ConfigService
 }
 
-func (d *DatabaseServiceImpl) GetDB(ctx context.Context) *gorm.DB {
+func (d *databaseServiceImpl) GetDB(ctx context.Context) *gorm.DB {
 	return d.db
 }
 
-func (d *DatabaseServiceImpl) Init(ctx context.Context) {
+func (d *databaseServiceImpl) Init(ctx context.Context) {
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s ", d.cfgService.GetDbHost(), d.cfgService.GetDbUser(), d.cfgService.GetDbPassword(), d.cfgService.GetDbName(), d.cfgService.GetDbPort())
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
@@ -33,7 +33,7 @@ func (d *DatabaseServiceImpl) Init(ctx context.Context) {
 }
 
 func NewDatabaseService(ctx context.Context, cfg *config.ConfigService) DatabaseService {
-	db := &DatabaseServiceImpl{
+	db := &databaseServiceImpl{
 		cfgService: cfg,
 	}
 	return db

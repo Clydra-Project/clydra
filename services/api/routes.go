@@ -7,7 +7,6 @@ import (
 )
 
 // router gin
-
 func (s *APIService) router(ctx context.Context, router *gin.Engine) *gin.Engine {
 
 	// router health
@@ -17,13 +16,7 @@ func (s *APIService) router(ctx context.Context, router *gin.Engine) *gin.Engine
 
 	v1 := router.Group("/api")
 	{
-		v1.GET("/pipeline", s.GetPipeline)
+		v1.GET("/pipeline", s.getPipeline)
 	}
 	return router
-}
-
-func (s *APIService) Run(ctx context.Context) {
-	gin := gin.Default()
-	router := s.router(ctx, gin)
-	router.Run(":8080")
 }
