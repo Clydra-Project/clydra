@@ -1,13 +1,11 @@
 package main
 
 import (
-	"context"
+	"os"
 
-	"clydra.io/services/server"
+	"clydra.io/cmd/clydra-server/command"
 )
 
 func main() {
-	ctx := context.Background()
-	srv := server.InitServer(ctx)
-	srv.Run(ctx)
+	os.Exit(command.RunServer())
 }
