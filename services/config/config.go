@@ -2,15 +2,17 @@ package config
 
 import (
 	"context"
-	"log"
 	"os"
 
 	"github.com/joho/godotenv"
 )
 
 type ConfigService struct {
-	appPort    string
-	appMode    string
+	// app config
+	appPort string
+	appMode string
+
+	// database config
 	dbHost     string
 	dbPort     string
 	dbUser     string
@@ -63,19 +65,15 @@ func (c *ConfigService) LoadConfig() {
 	c.appMode = os.Getenv("APP_MODE")
 }
 
-func (c *ConfigService) LoadFromDotEnv() {
+func (c *ConfigService) LoadFromDotEnv() error {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		return err
 	}
 	c.LoadConfig()
+	return nil
 }
 
 func NewConfigService(ctx context.Context) *ConfigService {
 	return &ConfigService{}
-}
-
-func NewConfigFromDotEnv(ctx context.Context) *ConfigService {
-	cfg := NewConfigService(ctx)
-	return cfg
 }

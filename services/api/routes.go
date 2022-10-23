@@ -7,7 +7,7 @@ import (
 )
 
 // router gin
-func (s *APIService) router(ctx context.Context, router *gin.Engine) *gin.Engine {
+func (s *APIServiceImpl) router(ctx context.Context, router *gin.Engine) *gin.Engine {
 
 	// router health
 	router.GET("/health", func(ctx *gin.Context) {

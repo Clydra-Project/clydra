@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"clydra.io/services/database"
-	"clydra.io/services/pipeline"
+	"clydra.io/services/pipeline/pipelineimpl"
 )
 
 type MigratorService struct {
@@ -17,8 +17,15 @@ func NewMigratorService(ctx context.Context, databaseService database.DatabaseSe
 	}
 }
 
-func (s *MigratorService) Migrate(ctx context.Context) {
-	s.databaseService.GetDB(ctx).AutoMigrate(
-		&pipeline.Pipeline{},
+func (s *MigratorService) Migrate(ctx context.Context) error {
+	return s.databaseService.GetDB(ctx).AutoMigrate(
+
+		// pipeline modules
+		&pipelineimpl.Pipeline{},
+		&pipelineimpl.PipelineNodeType{},
+		&pipelineimpl.PipelineNode{},
+		&pipelineimpl.PipelineRunner{},
+		&pipelineimpl.PipelineLog{},
+		&pipelineimpl.PipelineEdgeNode{},
 	)
 }

@@ -8,21 +8,25 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type APIService struct {
+type APIService interface {
+	Run(ctx context.Context) error
+}
+
+type APIServiceImpl struct {
 	piplineService pipeline.PipelineService
 	configService  *config.ConfigService
 }
 
-func NewAPIService(piplineService pipeline.PipelineService, configService *config.ConfigService) *APIService {
-	return &APIService{
+func NewAPIService(piplineService pipeline.PipelineService, configService *config.ConfigService) APIService {
+	return &APIServiceImpl{
 		piplineService: piplineService,
 		configService:  configService,
 	}
 }
 
-func (s *APIService) Run(ctx context.Context) {
+func (s *APIServiceImpl) Run(ctx context.Context) error {
 	gin.SetMode(s.configService.GetAppMode())
 	gin := gin.Default()
 	router := s.router(ctx, gin)
-	router.Run(s.configService.GetAppPort())
+	return router.Run(s.configService.GetAppPort())
 }
