@@ -6,7 +6,7 @@
 #### Generate wire
 `cd cmd/clydra-server/command && wire`
 
-### Config app with env
+#### Config app with env
 `cp .env.example .env`
 
 #### Run server
