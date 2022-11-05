@@ -1,19 +1,13 @@
-## Structur Folder
-```
-- app 
-    - services     <-- Buisnes Logic App
-        - repos    <-- Data from database
-        - entity   <-- Schema database / models schema
-        - schema   <-- Data schema from service
+## Structur Directory
+ - cmd : command line tools for this project
+ - service : service for this project, service app or service domain
+   
+## Getting Started
+#### Generate wire
+`cd cmd/clydra-server/command && wire`
 
-    - Handler   <-- Handler data like http, api, cmd
-```
+### Config app with env
+`cp .env.example .env`
 
-
-## Getting start
-
-Run via Docker
-```docker-compose up```
-
-Access app
-```http://localhost:8080```
+#### Run server
+`go run cmd/clydra-server/main.go`

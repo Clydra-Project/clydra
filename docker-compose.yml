@@ -3,9 +3,9 @@ services:
   db:
     image: postgres:13.6-alpine3.15
     env_file:
-      - cmd/clydra-server/.env
+      - .env
     ports:
-    - 5442:5442
+    - 5442:5432
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
