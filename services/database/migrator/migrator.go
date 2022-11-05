@@ -18,7 +18,7 @@ func NewMigratorService(ctx context.Context, databaseService database.DatabaseSe
 }
 
 func (s *MigratorService) Migrate(ctx context.Context) error {
-	return s.databaseService.GetDB(ctx).AutoMigrate(
+	return s.databaseService.GetDB().AutoMigrate(
 
 		// pipeline modules
 		&pipelineimpl.Pipeline{},

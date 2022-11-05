@@ -10,7 +10,7 @@ import (
 )
 
 type DatabaseService interface {
-	GetDB(ctx context.Context) *gorm.DB
+	GetDB() *gorm.DB
 	Init(ctx context.Context) error
 }
 
@@ -19,7 +19,7 @@ type databaseServiceImpl struct {
 	cfgService *config.ConfigService
 }
 
-func (d *databaseServiceImpl) GetDB(ctx context.Context) *gorm.DB {
+func (d *databaseServiceImpl) GetDB() *gorm.DB {
 	return d.db
 }
 
@@ -34,8 +34,10 @@ func (d *databaseServiceImpl) Init(ctx context.Context) error {
 }
 
 func NewDatabaseService(ctx context.Context, cfg *config.ConfigService) DatabaseService {
+	cfg.LoadFromDotEnv()
 	db := &databaseServiceImpl{
 		cfgService: cfg,
 	}
+	db.Init(ctx)
 	return db
 }

@@ -32,14 +32,11 @@ func (s *Server) Run(ctx context.Context) error {
 		return err
 	}
 
-	err = s.databaseService.Init(ctx)
-	if err != nil {
-		return err
-	}
 	err = s.migratorService.Migrate(ctx)
 	if err != nil {
 		return err
 	}
+
 	err = s.apiService.Run(ctx)
 	if err != nil {
 		return err

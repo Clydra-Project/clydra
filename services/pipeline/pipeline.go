@@ -9,3 +9,7 @@ type PipelineService interface {
 	GetPipeline(id int64) (*Pipeline, error)
 	GetPipelines() ([]*Pipeline, error)
 }
+
+type PipelineRepository interface {
+	GetPipeline() (*Pipeline, error)
+}

@@ -1,6 +1,10 @@
 package pipelineimpl
 
-import "time"
+import (
+	"time"
+
+	"clydra.io/services/pipeline"
+)
 
 type timeStamps struct {
 	CreatedAt time.Time
@@ -12,6 +16,13 @@ type Pipeline struct {
 	UUID string `gorm:"type:varchar(36);not null;unique_index"`
 	Name string `gorm:"type:varchar(255);not null"`
 	timeStamps
+}
+
+func (e Pipeline) ToEntity() *pipeline.Pipeline {
+	return &pipeline.Pipeline{
+		ID:   e.ID,
+		Name: e.Name,
+	}
 }
 
 type PipelineNodeType struct {
