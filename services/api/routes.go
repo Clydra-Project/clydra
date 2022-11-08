@@ -14,10 +14,26 @@ func (s *APIServiceImpl) router(ctx context.Context, router *gin.Engine) *gin.En
 		ctx.JSON(200, gin.H{"status": "ok"})
 	})
 
-	v1 := router.Group("/api/v1")
+	api := router.Group("/api")
 	{
-		v1.GET("/pipeline", s.getPipeline)
-		v1.GET("/pipelines", s.getPipelines)
+		v1 := api.Group("/v1")
+		{
+			s.routerV1(ctx, v1)
+		}
 	}
 	return router
+}
+
+func (s *APIServiceImpl) routerV1(ctx context.Context, v1 *gin.RouterGroup) {
+
+	// pipeline routes
+	pipeline := v1.Group("/pipelines")
+	{
+		pipeline.GET("/", s.getPipelines)
+		pipeline.GET("/:id", s.getPipeline)
+	}
+
+	// create someting here
+	// ...
+
 }
