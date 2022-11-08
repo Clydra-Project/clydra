@@ -14,7 +14,7 @@ func (s *APIServiceImpl) router(ctx context.Context, router *gin.Engine) *gin.En
 		ctx.JSON(200, gin.H{"status": "ok"})
 	})
 
-	v1 := router.Group("/api")
+	v1 := router.Group("/api/v1")
 	{
 		v1.GET("/pipeline", s.getPipeline)
 		v1.GET("/pipelines", s.getPipelines)
